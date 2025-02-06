@@ -9,7 +9,7 @@ let
     rev = "868da72f922589f841f80dcd3e8f2cf6cb063aa2";
     allRefs = false;
   });
-  python = pkgs.python3.override {
+  python = pkgs.python311.override {
     self = python;
     packageOverrides = pyfinal: pyprev: {
       alpaca-py = pyfinal.callPackage ./alpaca-py.nix { };
@@ -29,7 +29,6 @@ in pkgs.mkShell {
       toolz
       sqlalchemy
       psycopg2 # required for postgres
-
     ]))
   ];
 }
