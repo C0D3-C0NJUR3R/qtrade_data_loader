@@ -6,7 +6,7 @@ let
   database_src = (builtins.fetchGit {
     url = "git@github.com:C0D3-C0NJUR3R/qtrade_database.git";
     ref = "main";
-    rev = "360041854ed07aa4894e96e7f00b4eb02da344a1";
+    rev = "868da72f922589f841f80dcd3e8f2cf6cb063aa2";
     allRefs = false;
   });
   python = pkgs.python3.override {
@@ -24,7 +24,6 @@ in pkgs.mkShell {
       pytest
       pip
       hypothesis
-
       pandas
       alpaca-py
       toolz
