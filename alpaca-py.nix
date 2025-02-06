@@ -8,6 +8,7 @@
   poetry-dynamic-versioning,
   msgpack,
   pandas,
+  numpy,
   requests,
   pydantic,
   sseclient-py,
@@ -32,6 +33,7 @@ buildPythonPackage rec {
     poetry-core
     wheel
     msgpack
+    numpy
     pandas
     pydantic
     requests
