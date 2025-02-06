@@ -1,5 +1,4 @@
 {
-  lib,
   buildPythonPackage,
   fetchPypi,
   setuptools,
@@ -22,12 +21,11 @@ buildPythonPackage rec {
     hash = "sha256-rPW0PBKDXsm81P4irdyvc1s4RHiRVVygTdXQy+G24yk=";
   };
 
-  # do not run tests
   doCheck = true;
 
   # specific to buildPythonPackage, see its reference
   pyproject = true;
-  build-system = [
+  propagatedBuildInputs = [
     setuptools
     poetry-dynamic-versioning
     poetry-core

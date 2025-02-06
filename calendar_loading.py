@@ -2,7 +2,7 @@
 from alpaca.trading.client import TradingClient
 from alpaca.trading.enums import AssetExchange
 from data_util import query_exchange_id
-from main.sql.databases.trade.market_data import (
+from databases.trade.market_data import (
     marketDataEngine,
     Calendar
 )
@@ -13,7 +13,6 @@ from typing import Iterable
 from uuid import UUID
 from pytz import timezone, utc
 
-
 key = "AK15ZEVU7HLP77KZ52MF"
 secret = "M76YDIr13LLQeL5FM9BHzVSYoDZzv85O7yfF1q8d"
 
@@ -22,10 +21,6 @@ exchanges_with_common_hours: Iterable[UUID] = list(map(query_exchange_id, [
     AssetExchange.NYSE,
     AssetExchange.NASDAQ
 ]))
-
-#print(exchanges_with_common_hours)
-#with Session(marketDataEngine) as session, session.begin():
-#    print(session.execute(text("select * from market_data.calendar")).all())
 
 eastern_time = timezone('US/Eastern')
 
