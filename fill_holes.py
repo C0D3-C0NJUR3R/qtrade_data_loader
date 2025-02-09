@@ -1,4 +1,7 @@
-"""This script considers every minute in the calendar and then identifies.
+#!/usr/bin/env python3
+"""This script considers every minute that the NYSE, etc was open and identifies periods
+where there are no bars. These are assumed to be missing periods and bars are inserted for
+those periods.
 """
 from sqlalchemy import select, text
 from sqlalchemy.orm import Session
@@ -46,6 +49,7 @@ syms = list(transtab.keys())
 
 with Session(marketDataEngine) as session, session.begin():
     maybe_datetieme = session.execute(select(Bars.timestamp).order_by(Bars.timestamp).limit(1)).first()
+
     if maybe_datetieme != None:
         earliest_datetime = maybe_datetieme[0]
         market_periods = session.execute(
@@ -56,6 +60,7 @@ with Session(marketDataEngine) as session, session.begin():
                     Calendar.close < datetime.now(utc)
                 )
         ).all()
+
         for [open, close] in market_periods:
             # we get a list of every minute during the day
             minutes: list[datetime] = list(map(
@@ -75,6 +80,7 @@ with Session(marketDataEngine) as session, session.begin():
                          """),
                     {"mins": minutes}
                 ).all()))
+
             for ival in merge_datetime_intervals(missing_minutes):
                 print("adding bars in:", ival.left, ival.right)
                 bars = feed.get_stock_bars(StockBarsRequest(
@@ -85,5 +91,6 @@ with Session(marketDataEngine) as session, session.begin():
                     timeframe=TimeFrame(1, TimeFrameUnit.Minute)))
                 if type(bars) == BarSet:
                     insert_barset(bars, transtab)
+
     else:
         raise(Exception("There was no datetime given. Is your market_data.bars table empty?"))

@@ -1,4 +1,4 @@
-# this is code to stream alpaca
+#!/usr/bin/env python3
 from alpaca.data.live.stock import StockDataStream
 from alpaca.data.historical import StockHistoricalDataClient
 from alpaca.data.requests import StockBarsRequest

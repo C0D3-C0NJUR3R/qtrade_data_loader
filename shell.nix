@@ -6,7 +6,7 @@ let
   database_src = (builtins.fetchGit {
     url = "git@github.com:C0D3-C0NJUR3R/qtrade_database.git";
     ref = "main";
-    rev = "868da72f922589f841f80dcd3e8f2cf6cb063aa2";
+    rev = "db1b6a00ab9f2dafa8efcb97f8a7dd8e2c628832";
     allRefs = false;
   });
   python = pkgs.python312.override {

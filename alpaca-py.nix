@@ -1,18 +1,18 @@
-{
-  lib,
-  buildPythonPackage,
-  fetchPypi,
-  setuptools,
-  wheel,
-  poetry-core,
-  poetry-dynamic-versioning,
-  msgpack,
-  pandas,
-  numpy,
-  requests,
-  pydantic,
-  sseclient-py,
-  websockets,
+{ pkgs
+, setuptools
+, poetry-dynamic-versioning
+, poetry-core
+, wheel
+, msgpack
+, numpy
+, pandas
+, pydantic
+, requests
+, sseclient-py
+, websockets
+, buildPythonPackage
+, fetchPypi
+, python
 }:
 buildPythonPackage rec {
   pname = "alpaca_py";
@@ -28,16 +28,17 @@ buildPythonPackage rec {
   # specific to buildPythonPackage, see its reference
   pyproject = true;
   propagatedBuildInputs = [
-    setuptools
-    poetry-dynamic-versioning
-    poetry-core
-    wheel
-    msgpack
-    numpy
-    pandas
-    pydantic
-    requests
-    sseclient-py
-    websockets
+    (python.withPackages (python-pkgs: [
+      setuptools
+      poetry-dynamic-versioning
+      poetry-core
+      wheel
+      msgpack
+      numpy
+      pandas
+      pydantic
+      requests
+      sseclient-py
+      websockets]))
   ];
 }
